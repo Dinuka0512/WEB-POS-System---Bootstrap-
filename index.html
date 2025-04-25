@@ -155,96 +155,98 @@
       <div class="customerCon p-5">
         <div class="customer mt-5 p-4">
           <h2 class="mb-3">Manage Customers</h2>
-          
+
           <!-- GRID -->
-          <div class="container text-center">
-            <div class="row">
-              
-              <!-- FORM -->
-              <div class="form m-2">
-                <form>
-                  <div>
-                    <label for="custFName" class="form-label">Cust_Id : <span><b>C0879</b></span></label>
-                  </div>
+          <!-- <div class="custGrid"> -->
 
-                  <div class="mb-3">
-                    <label for="custFName" class="form-label">Frist Name</label>
-                    <input type="text" class="form-control" id="custFName" aria-describedby="emailHelp">
-                  </div>
+            <!-- FORM -->
+            <div class="form m-2">
+              <form>
+                <div>
+                  <label for="custFName" class="form-label">Cust_Id : <span><b>C0879</b></span></label>
+                </div>
 
-                  <div class="mb-3">
-                    <label for="custLname" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="custLname" aria-describedby="emailHelp">
-                  </div>
+                <div class="mb-3">
+                  <label for="custFName" class="form-label">Frist Name</label>
+                  <input type="text" class="form-control" id="custFName" aria-describedby="emailHelp">
+                </div>
 
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  
-                  <div class="mb-3">
-                    <label for="custContact" class="form-label">Contact</label>
-                    <input type="text" class="form-control" id="custContact">
-                  </div>
+                <div class="mb-3">
+                  <label for="custLname" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="custLname" aria-describedby="emailHelp">
+                </div>
 
-                  <!-- BUTTONS -->
-                  <div class="butons">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                  </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                
+                <div class="mb-3">
+                  <label for="custContact" class="form-label">Contact</label>
+                  <input type="text" class="form-control" id="custContact">
+                </div>
 
-                </form>
-              </div>
-              
-              <!-- TABLE -->
-              <div class="custTable">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Id</th>
-                      <th scope="col">Customer Id</th>
-                      <th scope="col">Order Id</th>
-                      <th scope="col">Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>C0678</td>
-                      <td>O07867</td>
-                      <td>2025/04/25</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>C0089</td>
-                      <td>O07867</td>
-                      <td>2025/04/25</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>C67867</td>
-                      <td>O07867</td>
-                      <td>2025/04/25</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>C67867</td>
-                      <td>O07867</td>
-                      <td>2025/04/25</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>C67867</td>
-                      <td>O07867</td>
-                      <td>2025/04/25</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>  
+                <!-- BUTTONS -->
+                <div class="butons">
+                  <button type="submit" class="btn btn-success">Save</button>
+                  <button type="button" class="btn btn-danger">Delete</button>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+
+              </form>
+              <!-- END OF THE FORM -->
             </div>
-          </div>
+
+
+            <!-- TABLE -->
+            <div class="custTable mt`-2">
+              <table class="table table-striped custTable" id="custtable">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Customer Id</th>
+                    <th scope="col">Order Id</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>C0678</td>
+                    <td>O07867</td>
+                    <td>2025/04/25</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>C0089</td>
+                    <td>O07867</td>
+                    <td>2025/04/25</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>C67867</td>
+                    <td>O07867</td>
+                    <td>2025/04/25</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>C67867</td>
+                    <td>O07867</td>
+                    <td>2025/04/25</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>C67867</td>
+                    <td>O07867</td>
+                    <td>2025/04/25</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- END OF TABLE -->
+            </div>
+
+          <!-- </div> -->
 
         </div>
       </div>
