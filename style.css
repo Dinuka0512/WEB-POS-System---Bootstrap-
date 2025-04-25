@@ -190,7 +190,7 @@
 .custGrid{
     width: 100%;
     height: fit-content;
-    background-color: beige;
+    /* background-color: beige; */
 
     display: grid;
     grid-template-columns: fit-content(300px) 1fr;
@@ -198,6 +198,11 @@
 
 .custTable{
     width: 100%;
+}
+
+table{
+    max-width: 100%;
+    overflow: scroll;
 }
 
 @media all and (max-width : 800px) {
@@ -251,21 +256,18 @@
     }
 }
 
+/* MAKE SMALL FONS */
 @media screen and (max-width: 460px) {
-    h4,h5.butons>.btn,th,td,p{
-        font-size: 10px;
+    th,td{
+        font-size: 11px;
     }
 
-    h1{
-        font-size: 12px;
+    .dashboard{
+        margin: 10px;
     }
 
-    h2,h3{
-        font-size: 12.6px;
-    }
-
-    h6{
-        font-size: 9.5px;
+    .customerCon,.dashboard_Con{
+        padding: 0 !important
     }
 }
 
