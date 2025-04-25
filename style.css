@@ -1,0 +1,59 @@
+nav{
+    position: fixed;
+}
+
+#ul{
+    list-style: none;
+    text-align: end;
+    margin: 0;
+    padding-right: 5px;
+}
+
+.btnLogOut{
+    border: 1px solid gray;
+}
+
+
+/* hero Section */
+
+.hero{
+    background-color: rgb(73, 63, 6);
+    width: 100vw;
+    height: 90vh;
+    background-image: url(images/background.png);
+    background-size: cover;
+    /* overflow: hidden; */
+}
+
+.container{
+    width: 60vw;
+    height: fit-content;
+    padding: 50px;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+
+    position: absolute;
+    top: 180px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+#textCon{
+    width: 40vw;
+    height: fit-content;
+    text-align: center;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+
+/* DASHBOARD SECTION */
+.dashboard_Con{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
