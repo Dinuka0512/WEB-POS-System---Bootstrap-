@@ -30,7 +30,7 @@
     overflow: hidden;
 }
 
-.container{
+.contHero{
     width: 60vw;
     height: fit-content;
     padding: 50px;
@@ -47,7 +47,7 @@
     transition-duration: 1.15s;
 }
 
-.container:hover{
+.contHero:hover{
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.295);
 }
 
@@ -118,5 +118,36 @@
 .customerCon{
     width: 100vw;
     height: 100vh;
-    background-color: black;
+
+    position: relative;
+}
+
+.customer{
+    max-width: 1200px;
+    height: fit-content;
+    background-color: rgba(128, 128, 128, 0.288);
+    border-radius: 10px;
+
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.form{
+    width: 310px;
+    height: fit-content;
+    padding: 15px;
+    background-color: rgba(133, 133, 133, 0.253);
+    border-radius: 10px;
+    text-align: start;
+}
+
+.butons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.custTable{
+    width: 800px;
 }
