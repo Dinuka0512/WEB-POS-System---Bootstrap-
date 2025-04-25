@@ -26,6 +26,7 @@
     height: 100vh;
     background-image: url(images/background.png);
     background-size: cover;
+    position: relative;
     overflow: hidden;
 }
 
@@ -37,7 +38,7 @@
     background-color: rgb(255, 255, 255);
 
     position: absolute;
-    top: 180px;
+    top: 0;
     left: 0;
     bottom: 0;
     right: 0;
@@ -60,16 +61,20 @@
     justify-self: center;
 }
 
+@media all and (max-width : 500px) {
+    #textCon{
+        text-align: start;
+    }
+}
+
 
 /* DASHBOARD SECTION */
 .dashboard_Con{
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: fit-content;
+    /* overflow: hidden; */
+
+    position: relative;
 }
 
 .dashboard{
@@ -79,7 +84,6 @@
     border-radius: 10px;
 
     padding: 40px;
-
 
     position: absolute;
     left: 0;
@@ -107,4 +111,11 @@
 
 .income{
     color: rgba(151, 151, 151, 0.575);
+}
+
+.teblecenter{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
