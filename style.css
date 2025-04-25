@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 /* NAVIGATIONS SECTION */
 .navigation{
     position: fixed;
@@ -156,7 +160,7 @@
 /* MANAGE CUSTOMER SECTION */
 .customerCon{
     width: 100vw;
-    height: 100vh;
+    height: fit-content;
 
     position: relative;
 }
