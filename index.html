@@ -10,14 +10,14 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary navigation">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">ND Products</a>
+          <a class="navbar-brand" href="index.html">ND Products</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#dash">Home</a>
                 </li>
 
                 <li class="nav-item">
@@ -48,6 +48,7 @@
         </div>
       </nav>
 
+      <!-- HERO SECTION -->
       <div class="hero">
         <div class="container">
           <div id="textCon">
@@ -57,9 +58,91 @@
         </div>
       </div>
 
+      <!-- DASHBORD SECTION -->
       <div class="dashboard_Con">
-        <div class="dashboard">
+        <div class="dashboard mt-5" id="dash">
+          <h3>Wellcome <span>Sample name</span></h3>
 
+          <div class="dashCardsCon">
+            <div class="text-center">
+              <div class="row wrapper">
+                <!-- GRID LAYOUT -->
+                 
+                <div class="card m-2 cards">
+                  <div>
+                    <div class="card-body text-start">
+                      <h5 class="card-title">Yearly Income</h5>
+                      <h1 class="income">Rs <span>233000.00</span>/=</h1>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card m-2 cards">
+                  <div>
+                    <div class="card-body text-start">
+                      <h5 class="card-title">Monthly Income</h5>
+                      <h1 class="income">Rs <span>23000.00</span>/=</h1>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card m-2 cards">
+                  <div>
+                    <div class="card-body text-start">
+                      <h5 class="card-title">Today Income</h5>
+                      <h1 class="income">Rs <span>3000.00</span>/=</h1>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <h4 class="mt-2 text-secondary fs-6 text">Recent sales</h4>
+          <!-- TABLE -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Customer Id</th>
+                <th scope="col">Order Id</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>C0678</td>
+                <td>O07867</td>
+                <td>2025/04/25</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>C0089</td>
+                <td>O07867</td>
+                <td>2025/04/25</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>C67867</td>
+                <td>O07867</td>
+                <td>2025/04/25</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>C67867</td>
+                <td>O07867</td>
+                <td>2025/04/25</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>C67867</td>
+                <td>O07867</td>
+                <td>2025/04/25</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
