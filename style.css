@@ -71,7 +71,6 @@
 /* DASHBOARD SECTION */
 .dashboard_Con{
     width: 100vw;
-    height: fit-content;
     /* overflow: hidden; */
 
     position: relative;
@@ -85,7 +84,7 @@
 
     padding: 40px;
 
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
     margin: auto;
@@ -113,9 +112,11 @@
     color: rgba(151, 151, 151, 0.575);
 }
 
-.teblecenter{
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
+
+
+/* MANAGE CUSTOMER SECTION */
+.customerCon{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
 }
