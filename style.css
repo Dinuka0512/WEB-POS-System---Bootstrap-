@@ -1,5 +1,10 @@
-nav{
+/* NAVIGATIONS SECTION */
+.navigation{
     position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
 }
 
 #ul{
@@ -14,12 +19,11 @@ nav{
 }
 
 
-/* hero Section */
-
+/* HERO SECTION */
 .hero{
     background-color: rgb(73, 63, 6);
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
     background-image: url(images/background.png);
     background-size: cover;
     /* overflow: hidden; */
@@ -56,4 +60,16 @@ nav{
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dashboard{
+    max-width: 1200px;
+    height: 100px;
+
+    /* height: fit-content; */
+    background-color: black;
 }
