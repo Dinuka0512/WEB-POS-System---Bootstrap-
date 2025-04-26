@@ -22,15 +22,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Customer</a>
+                    <a class="nav-link active" aria-current="page" href="#Customer">Customer</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Item</a>
+                    <a class="nav-link active" aria-current="page" href="#Item">Item</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Order</a>
+                    <a class="nav-link active" aria-current="page" href="#Orders">Order</a>
                 </li>
             </ul>
 
@@ -152,7 +152,7 @@
 
 
       <!-- MANAGE CUSTOMER SECTION -->
-      <div class="customerCon p-5">
+      <div class="customerCon p-5" id="Customer">
         <div class="customer mt-5 p-4">
           <h2 class="mb-3">Manage Customers</h2>
 
@@ -252,8 +252,9 @@
       </div>
 
 
+
       <!-- MANAGE ITEM SECTION (COPPY OF THE CUSTOMER SECTION) -->
-      <div class="customerCon p-5">
+      <div class="customerCon p-5" id="Item">
         <div class="customer mt-5 p-4">
           <h2 class="mb-3">Manage Items</h2>
 
@@ -347,10 +348,13 @@
         </div>
       </div>
 
+
+
+
       <!-- MANAGE ORDERS SECTION (COPPY OF THE CUSTOMER SECTION)-->
-      <div class="customerCon p-5">
+      <div class="customerCon p-5" id="Orders">
         <div class="customer mt-5 p-4">
-          <h2 class="mb-3">Manage Customers</h2>
+          <h2 class="mb-3">Manage Orders</h2>
 
           <!-- GRID -->
           <div class="custGrid">
@@ -359,27 +363,68 @@
             <div class="form m-2">
               <form>
                 <div>
-                  <label for="custFName" class="form-label">Cust_Id : <span><b>C0879</b></span></label>
+                  <label for="custFName" class="form-label">Order_Id : <span><b>O0879</b></span></label>
+                </div>
+                
+                <!-- CUSTOMER -->
+                <div class="wrapperselector">
+                  <hr>
+                
+                  <div class="mb-3">
+                    <div class="col-md-4" style="width: 100%;">
+                      <label for="inputState" class="form-label">Select Customer :</label>
+                      <select id="inputState" class="form-select">
+                        <option selected>Choose</option>
+                        <option>C001</option>
+                        <option>C002</option>
+                        <option>C003</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label">Name : <span>Dinuka Lakmal</span></label>
+                    <label class="form-label">address : <span>Bandaragama</span></label>
+                  </div>
+                  
+                  <hr>
+                  <!-- CUST WRAPPER END -->
+                </div>
+
+                <!-- ITEM -->
+                <div class="wrapperselector">
+                
+                  <div class="mb-3">
+                    <div class="col-md-4" style="width: 100%;">
+                      <label for="ItemIdSelector" class="form-label">Select Item :</label>
+                      <select id="ItemIdSelector" class="form-select">
+                        <option selected>Choose</option>
+                        <option>I001</option>
+                        <option>I002</option>
+                        <option>I003</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label">Name : <span>Tea Packet</span></label>
+                    <br>
+                    <label class="form-label">Qty On Hand : <span>10</span></label>
+                    <br>
+                    <label class="form-label">Price : <span>85</span></label>
+                  </div>
+                  
+                  <hr>
+                  <!-- ITEM WRAPPER END -->
                 </div>
 
                 <div class="mb-3">
-                  <label for="custFName" class="form-label">Frist Name</label>
-                  <input type="text" class="form-control" id="custFName" aria-describedby="emailHelp">
-                </div>
-
-                <div class="mb-3">
-                  <label for="custLname" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="custLname" aria-describedby="emailHelp">
-                </div>
-
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <label for="qty" class="form-label">Email address</label>
+                  <input type="number" class="form-control" id="qty">
                 </div>
                 
                 <div class="mb-3">
-                  <label for="custContact" class="form-label">Contact</label>
-                  <input type="text" class="form-control" id="custContact">
+                  <label for="priceOrder" class="form-label">Total : <span style="font-weight: bold;">Rs1000.00/=</span></label>
                 </div>
 
                 <!-- BUTTONS -->
