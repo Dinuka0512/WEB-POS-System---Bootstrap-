@@ -1,0 +1,50 @@
+/* DASHBOARD SECTION */
+.dashboard_Con{
+    width: 100vw;
+    /* overflow: hidden; */
+
+    position: relative;
+}
+
+.dashboard{
+    max-width: 1200px;
+    height: fit-content;
+    background-color: rgb(228, 228, 228);
+    border-radius: 10px;
+
+    padding: 40px;
+
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.cards{
+    width: 350px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 1s;
+}
+
+.cards:hover{
+    box-shadow: 3px 3px 5px rgba(128, 128, 128, 0.342);
+}
+
+.wrapper{
+    justify-content: center;
+}
+
+.income{
+    color: rgba(151, 151, 151, 0.575);
+}
+
+.wrapper {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}

@@ -1,0 +1,118 @@
+/* MANAGE CUSTOMER SECTION */
+.customerCon{
+    width: 100vw;
+    height: fit-content;
+
+    position: relative;
+}
+
+.customer{
+    max-width: 1200px;
+    height: fit-content;
+    background-color: rgba(128, 128, 128, 0.288);
+    border-radius: 10px;
+
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.form{
+    width: 310px;
+    height: fit-content;
+    padding: 15px;
+    background-color: rgba(133, 133, 133, 0.253);
+    border-radius: 10px;
+    text-align: start;
+}
+
+.butons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.custGrid{
+    width: 100%;
+    height: fit-content;
+    /* background-color: beige; */
+
+    display: grid;
+    grid-template-columns: fit-content(300px) 1fr;
+}
+
+.custTable{
+    width: 100%;
+}
+
+table{
+    max-width: 100%;
+    overflow: scroll;
+}
+
+@media all and (max-width : 800px) {
+    .custGrid{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+@media all and (max-width : 475px) {
+    .customer{
+        margin: 0;
+        padding: 0;
+    }
+
+    .custTable{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .form{
+        width: 100%;
+        margin: 0 !important
+    }
+
+    .custGrid{
+        margin: 0;
+        padding: 0;
+    }
+
+    .butons{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .butons>button{
+        margin: 1px;
+    }
+
+    .butons>button:nth-child(4){
+        grid-column: 1/4;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .custGrid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* MAKE SMALL FONS */
+@media screen and (max-width: 460px) {
+    th,td{
+        font-size: 11px;
+    }
+
+    .dashboard{
+        margin: 10px;
+    }
+
+    .customerCon,.dashboard_Con{
+        padding: 0 !important
+    }
+}
+

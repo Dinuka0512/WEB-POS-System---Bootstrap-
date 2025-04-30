@@ -1,0 +1,40 @@
+body {
+    overflow-x: hidden;
+}
+
+/* NAVIGATIONS SECTION */
+.navigation{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+#ul{
+    list-style: none;
+    text-align: end;
+    margin: 0;
+    padding-right: 5px;
+}
+
+.btnLogOut{
+    border: 1px solid gray;
+}
+
+
+@media all and (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+        align-items: end;
+    }
+
+    #ul {
+        text-align: end;
+        padding: 0;
+    }
+
+    .btnLogOut {
+        margin-bottom: 10px;
+    }
+}
