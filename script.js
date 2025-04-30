@@ -30,3 +30,14 @@ function pressOrders(){
     document.getElementById("Customer").style.display="none";
     document.getElementById("Item").style.display="none";
 }
+
+function pressHome(){
+    //HERE SHOWING THE CUSTOMER SECTION 
+    document.getElementById("dashboard").style.display="block";
+    document.getElementById("hero").style.display="block";
+
+    //NOW NEED TO HIDE ANOTHER ALL
+    document.getElementById("Customer").style.display="none";
+    document.getElementById("Item").style.display="none";
+    document.getElementById("Orders").style.display="none";
+}
