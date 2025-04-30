@@ -21,19 +21,19 @@
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#dash">Home</a>
+                    <a class="nav-link active" aria-current="page"  href="#dash">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#Customer">Customer</a>
+                    <a class="nav-link active" aria-current="page" href="#Customer" onclick=pressCustomer()>Customer</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#Item">Item</a>
+                    <a class="nav-link active" aria-current="page" href="#Item" onclick= pressItem()>Item</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#Orders">Order</a>
+                    <a class="nav-link active" aria-current="page" href="#Orders" onclick=pressOrders()>Order</a>
                 </li>
             </ul>
 
@@ -53,7 +53,7 @@
       </nav>
 
       <!-- HERO SECTION -->
-      <div class="hero p-4">
+      <div class="hero p-4" id="hero">
         <div>
           <div class="container contHero">
             <div id="textCon">
@@ -65,7 +65,7 @@
       </div>
 
       <!-- DASHBORD SECTION -->
-      <div class="dashboard_Con p-5">
+      <div class="dashboard_Con p-5" id="dashboard">
         <div class="dashboard" id="dash">
           <h3>Wellcome <span>Sample name</span></h3>
 
