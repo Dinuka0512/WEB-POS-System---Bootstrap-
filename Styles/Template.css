@@ -102,10 +102,10 @@ table{
 }
 
 /* MAKE SMALL FONS */
-@media screen and (max-width: 460px) {
-    th,td{
-        font-size: 11px;
-    }
+@media screen and (max-width: 800px) {
+    /* th,td{
+        font-size: 8.5px;
+    } */
 
     .dashboard{
         margin: 10px;
@@ -118,4 +118,8 @@ table{
 
 #Customer, #Item, #Orders{
     display: none;
+}
+
+th,td{
+    font-size: 50%;
 }

@@ -74,4 +74,36 @@ function pageReset(){
     txtContact.value = "";
     
     loadCustIds();
+    loadTbl();
+}
+
+
+loadTbl();
+// HERE LOAD THE TABLE
+function loadTbl() {
+    let tbody = document.getElementById("custTBody");
+    tbody.innerHTML = ""; // Clear previous rows
+
+    for (let i = 0; i < customer_db.length; i++) {
+        let row = document.createElement("tr");
+
+        let cellId = document.createElement("td");
+        cellId.textContent = customer_db[i].custId;
+
+        let cellName = document.createElement("td");
+        cellName.textContent = customer_db[i].custFname + " " + customer_db[i].cuatLname;
+
+        let cellEmail = document.createElement("td");
+        cellEmail.textContent = customer_db[i].custEmail;
+
+        let cellContact = document.createElement("td");
+        cellContact.textContent = customer_db[i].custContact;
+
+        row.appendChild(cellId);
+        row.appendChild(cellName);
+        row.appendChild(cellEmail);
+        row.appendChild(cellContact);
+
+        tbody.appendChild(row);
+    }
 }
