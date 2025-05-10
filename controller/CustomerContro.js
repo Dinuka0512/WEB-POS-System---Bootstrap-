@@ -15,6 +15,7 @@ loadCustIds();
 // GENERATE  THE CUST ID
 function loadCustIds(){
     custId.innerText = "C" + String(customer_db.length + 1).padStart(3,"0");
+    console.log(custId.innerText);
 }
 
 
@@ -60,7 +61,6 @@ document.getElementById("CustSave").addEventListener('click', function(){
 // CUSTOMER SAVE HERE
 function save(custObj){
     customer_db.push(custObj);
-    // console.log(customer_db);
 
     pageReset();
 }
@@ -68,12 +68,13 @@ function save(custObj){
 
 //HERE RESET THE PAGE
 function pageReset(){
+    loadCustIds();
+
     txtFName.value = "";
     txtLName.value = "";
     txtEmail.value = "";
     txtContact.value = "";
-    
-    loadCustIds();
+
     loadTbl();
 }
 
@@ -182,3 +183,77 @@ function update(){
 
     pageReset();
 }
+
+
+//DELETE ---->>>
+document.getElementById("custDelete").addEventListener('click', function(){
+
+    let id = custId.innerText;
+    let fname = txtFName.value;
+    let lName = txtLName.value;
+    let email = txtEmail.value;
+    let contact = txtContact.value;
+
+    if(Validation.isNameValid(fname) && Validation.isNameValid(lName) && Validation.isEmailValid(email) && Validation.isContactValid(contact)){
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: "btn btn-success",
+              cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+          });
+          swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+                deleteCustomer();
+                swalWithBootstrapButtons.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Your imaginary file is safe :)",
+                icon: "error"
+              });
+            }
+          });
+    }else{
+        Swal.fire("Before Delete Select The Id You want to delete");
+    }
+
+    
+})
+
+function deleteCustomer(){
+    let index;
+    let id = custId.innerText;
+    for(let i = 0; i < customer_db.length; i++){
+        if(id == customer_db[i].custId){
+            index = i;
+        }
+    }
+
+    if(index != null){
+        //NOW DELETE THE INDEX
+        customer_db.splice(index);
+
+        pageReset();
+    }
+}
+
+//HERE PAGE RESET
+document.getElementById("custReset").addEventListener("click", function(){
+    pageReset();
+});
