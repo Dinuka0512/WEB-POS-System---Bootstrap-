@@ -114,9 +114,6 @@ document.getElementById("custTBody").addEventListener('click', function(e){
     let cell =row.children;
 
     for(let i = 0; i < customer_db.length; i++){
-        console.log(cell[0]);
-        console.log(customer_db[i].custId);
-
         if(cell[0].innerText == customer_db[i].custId){
             custId.innerText = customer_db[i].custId;
             txtFName.value = customer_db[i].custFname;
@@ -126,3 +123,62 @@ document.getElementById("custTBody").addEventListener('click', function(e){
         }
     }
 })
+
+
+// UPDATE ---->>
+document.getElementById("custUpdate").addEventListener('click', function(){
+    isValidToUpdate();
+})
+
+function isValidToUpdate(){
+    let id = custId.innerText;
+    let fname = txtFName.value;
+    let lName = txtLName.value;
+    let email = txtEmail.value;
+    let contact = txtContact.value;
+
+
+    if(Validation.isNameValid(fname)){
+        if(Validation.isNameValid(lName)){
+            if(Validation.isEmailValid(email)){
+                if(Validation.isContactValid(contact)){
+                    //All OK
+                    update();
+                }else{
+                    Swal.fire("Please Enter The valid Contact");
+                }
+            }else{
+                Swal.fire("Please enter the valid email");
+            }
+        }else{
+            Swal.fire("Please enter the valid name, The Name Only can have letters");
+        }
+    }else{
+        Swal.fire("Please enter the valid name, The Name Only can have letters");
+    }
+}
+
+
+function update(){
+    //FRIST GET THE INDEX 
+    let index;
+    for(let i = 0; i < customer_db.length; i++){
+        if(custId.innerText == customer_db[i].custId){
+            index = i;
+        }
+    }
+
+
+    let fname = txtFName.value;
+    let lName = txtLName.value;
+    let email = txtEmail.value;
+    let contact = txtContact.value;
+
+    // CREATEING CUSTOMER OBJ
+    customer_db[index].custFname = fname;
+    customer_db[index].cuatLname = lName;
+    customer_db[index].custEmail = email;
+    customer_db[index].custContact = contact;
+
+    pageReset();
+}
