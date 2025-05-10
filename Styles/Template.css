@@ -29,6 +29,7 @@
 
 .butons{
     display: flex;
+    cursor: pointer;
     justify-content: space-between;
 }
 
@@ -43,6 +44,7 @@
 
 .custTable{
     width: 100%;
+    table-layout: fixed;
 }
 
 table{
@@ -121,5 +123,6 @@ table{
 }
 
 th,td{
-    font-size: 50%;
+    font-size: 60%;
+    overflow: hidden;
 }

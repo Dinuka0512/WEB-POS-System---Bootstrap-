@@ -60,7 +60,7 @@ document.getElementById("CustSave").addEventListener('click', function(){
 // CUSTOMER SAVE HERE
 function save(custObj){
     customer_db.push(custObj);
-    console.log(customer_db);
+    // console.log(customer_db);
 
     pageReset();
 }
@@ -107,3 +107,22 @@ function loadTbl() {
         tbody.appendChild(row);
     }
 }
+
+// THERE SELECTING THE SELECTED ROW IN TABLE 
+document.getElementById("custTBody").addEventListener('click', function(e){
+    let row = e.target.closest('tr');
+    let cell =row.children;
+
+    for(let i = 0; i < customer_db.length; i++){
+        console.log(cell[0]);
+        console.log(customer_db[i].custId);
+
+        if(cell[0].innerText == customer_db[i].custId){
+            custId.innerText = customer_db[i].custId;
+            txtFName.value = customer_db[i].custFname;
+            txtLName.value = customer_db[i].cuatLname;
+            txtEmail.value = customer_db[i].custEmail;
+            txtContact.value = customer_db[i].custContact;
+        }
+    }
+})
