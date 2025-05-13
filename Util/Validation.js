@@ -1,7 +1,7 @@
 export class Validation {
     
     static isNameValid(name) {
-        return /^[A-Za-z.]+$/.test(name);
+        return /^[A-Za-z. ]+$/.test(name);
     }
 
     static isEmailValid(email) {
