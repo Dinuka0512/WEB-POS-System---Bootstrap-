@@ -13,14 +13,12 @@ let btnDelete = document.getElementById("itemDeleteBtn");
 let btnUpdate = document.getElementById("itemUpdateBtn");
 let btnReset = document.getElementById("itemResetBtn");
 
-// TABLE
-let itemTBody = document.getElementById("itemTbody");
-
-
 
 loadItemIds();
 
-function loadItemIds(){}
+function loadItemIds(){
+    
+}
 
 btnSave.addEventListener('click', function(){
     saveItems();
@@ -37,7 +35,8 @@ function saveItems(){
         }
 
         item_db.push(itemObj);
-        console.log(item_db);
+
+        resetPage();
     }
 }
 
@@ -70,4 +69,41 @@ function updateItems(){}
 
 function deleteItems(){}
 
-function resetPage(){}
+function resetPage(){
+    loadTable();
+    cleartext();
+}
+
+
+function loadTable(){
+    // TABLE
+    let tbody = document.getElementById("itemTbody");
+    tbody.innerHTML = "";
+    
+    for(let i = 0; i < item_db.length; i++){
+        let row = document.createElement("tr");
+
+        let cellId = document.createElement("td");
+        cellId.textContent = item_db[i].item_Id;
+
+        let cellName = document.createElement("td");
+        cellName.textContent = item_db[i].item_Name;
+
+        let cellQty = document.createElement("td");
+        cellQty.textContent = item_db[i].item_qty;
+
+        let cellPrice = document.createElement("td");
+        cellPrice.textContent = item_db[i].item_price;
+
+        row.appendChild(cellId);
+        row.appendChild(cellName);
+        row.appendChild(cellQty);
+        row.appendChild(cellPrice);
+
+        tbody.appendChild(row);
+    }
+}
+
+function cleartext(){
+
+}
