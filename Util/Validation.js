@@ -12,5 +12,15 @@ export class Validation {
         return /^\d{10}$/.test(contact);
     }
     
-    // Add more methods as needed
+    static isItemNameValid(itemName) {
+        return /^[A-Za-z0-9\s\-]{2,50}$/.test(itemName);
+    }
+
+    static isIntegerValid(value) {
+        return /^-?\d+$/.test(value);
+    }
+
+    static isDoubleValid(value) {
+        return /^-?\d+(\.\d+)?$/.test(value);
+    }
 }
