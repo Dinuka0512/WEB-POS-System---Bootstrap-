@@ -116,10 +116,16 @@ function cleartext(){
 
 
 let tbody = document.getElementById("itemTbody");
-tbody.addEventListener('click', function(){
-    getTableDetails();
-})
+tbody.addEventListener('click', function(e){
+    let row = e.target.closest('tr');
+    let cell = row.children;
 
-function getTableDetails(){
-    alert();
-}
+    for(let i = 0; i < item_db.length; i++){
+        if(cell[0].innerText == item_db[i].item_Id){
+            lblItemId.innerText = item_db[i].item_Id;
+            txtItemName.value = item_db[i].item_Name;
+            txtItemQty.value = item_db[i].item_qty;
+            txtItemPrice.value = item_db[i].item_price;
+        }
+    }
+})
