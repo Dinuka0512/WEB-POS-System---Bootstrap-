@@ -19,7 +19,17 @@ btnReset.addEventListener("click", function(){
 
 genarateNextId();
 function genarateNextId(){
-    
+    let maxId = 0;
+
+    for (let i = 0; i < item_db.length; i++) {
+        let idNum = parseInt(item_db[i].item_Id.replace("I", ""));
+        if (idNum > maxId) {
+            maxId = idNum;
+        }
+    }
+
+    let nextId = "I" + String(maxId + 1).padStart(3, "0");
+    lblItemId.innerText = nextId;
 }
 
 btnSave.addEventListener('click', function(){
