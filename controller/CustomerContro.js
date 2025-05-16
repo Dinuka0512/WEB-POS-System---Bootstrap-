@@ -8,7 +8,14 @@ let txtLName = document.getElementById("custLname");
 let txtEmail = document.getElementById("custEmail");
 let txtContact = document.getElementById("custContact");
 
+//BUTTONS
+let btnDelete = document.getElementById("custDelete");
+let btnSave = document.getElementById("CustSave");
+let btnReset = document.getElementById("custReset");
+let btnUpdate = document.getElementById("custUpdate");
+
 loadCustIds();
+pageReset();
 
 // Generate unique CUST ID
 function loadCustIds() {
@@ -73,6 +80,12 @@ function pageReset() {
     txtEmail.value = "";
     txtContact.value = "";
     loadTbl();
+
+
+    btnDelete.disabled = true;
+    btnReset.disabled = true;
+    btnUpdate.disabled = true;
+    btnSave.disabled = false;
 }
 
 // Load table
@@ -118,6 +131,13 @@ document.getElementById("custTBody").addEventListener('click', function (e) {
             txtLName.value = customer_db[i].cuatLname;
             txtEmail.value = customer_db[i].custEmail;
             txtContact.value = customer_db[i].custContact;
+
+
+
+            btnDelete.disabled = false;
+            btnReset.disabled = false;
+            btnUpdate.disabled = false;
+            btnSave.disabled = true;
         }
     }
 });

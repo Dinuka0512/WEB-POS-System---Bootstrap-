@@ -13,6 +13,8 @@ let btnDelete = document.getElementById("itemDeleteBtn");
 let btnUpdate = document.getElementById("itemUpdateBtn");
 let btnReset = document.getElementById("itemResetBtn");
 
+resetPage();
+
 btnReset.addEventListener("click", function(){
     resetPage();
 })
@@ -77,7 +79,42 @@ function isValidToSave(){
     return false;
 }
 
-function updateItems(){}
+btnUpdate.addEventListener('click', function(){
+     let check = 0;
+    for(let i = 0; i < item_db.length; i++){
+        if(lblItemId.innerText == item_db[i].item_Id){
+            check = 1;
+        }
+    }
+
+    if(check != 0){
+        updateItems();
+    }else{
+        Swal.fire("Before update you need to select the Item you need to Update!!..");
+    }
+})
+
+function updateItems(){
+    // CHECK IS VALID OBJ
+    if(isValidToSave()){
+
+        // HERE GET THE ITEM INDEX
+        let index;
+        for(let i = 0; i < item_db.length; i++){
+            if(lblItemId.innerText == item_db[i].item_Id){
+                index = i;
+            }
+        }
+
+        // HERE UPDATE
+        item_db[index].item_Name = txtItemName.value;
+        item_db[index].item_qty = txtItemQty.value;
+        item_db[index].item_price = txtItemPrice.value;
+
+        // HERE REFRESH THE PAGE 
+        resetPage();
+    }
+}
 
 btnDelete.addEventListener('click', function(){
     let check = 0;
@@ -121,7 +158,7 @@ function deleteItems(){
         });
 
         resetPage();
-        
+
     } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -148,6 +185,10 @@ function deleteItemObj(){
 }
 
 function resetPage(){
+    btnDelete.disabled = true;
+    btnReset.disabled = true;
+    btnUpdate.disabled = true;
+    btnSave.disabled = false;
     loadTable();
     cleartext();
 }
@@ -191,6 +232,7 @@ function cleartext(){
 }
 
 
+// HERE LOAD THE TABLE DATA
 let tbody = document.getElementById("itemTbody");
 tbody.addEventListener('click', function(e){
     let row = e.target.closest('tr');
@@ -202,6 +244,12 @@ tbody.addEventListener('click', function(e){
             txtItemName.value = item_db[i].item_Name;
             txtItemQty.value = item_db[i].item_qty;
             txtItemPrice.value = item_db[i].item_price;
+
+
+            btnDelete.disabled = false;
+            btnUpdate.disabled = false;
+            btnReset.disabled = false;
+            btnSave.disabled = true;
         }
     }
 })
