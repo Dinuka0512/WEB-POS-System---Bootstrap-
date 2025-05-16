@@ -13,10 +13,12 @@ let btnDelete = document.getElementById("itemDeleteBtn");
 let btnUpdate = document.getElementById("itemUpdateBtn");
 let btnReset = document.getElementById("itemResetBtn");
 
+btnReset.addEventListener("click", function(){
+    resetPage();
+})
 
-loadItemIds();
-
-function loadItemIds(){
+genarateNextId();
+function genarateNextId(){
     
 }
 
@@ -105,5 +107,19 @@ function loadTable(){
 }
 
 function cleartext(){
+    genarateNextId();
 
+    txtItemName.value = "";
+    txtItemPrice.value = "";
+    txtItemQty.value = "";
+}
+
+
+let tbody = document.getElementById("itemTbody");
+tbody.addEventListener('click', function(){
+    getTableDetails();
+})
+
+function getTableDetails(){
+    alert();
 }
