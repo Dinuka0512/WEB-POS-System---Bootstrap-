@@ -79,7 +79,73 @@ function isValidToSave(){
 
 function updateItems(){}
 
-function deleteItems(){}
+btnDelete.addEventListener('click', function(){
+    let check = 0;
+    for(let i = 0; i < item_db.length; i++){
+        if(lblItemId.innerText == item_db[i].item_Id){
+            check = 1;
+        }
+    }
+
+    if(check != 0){
+        deleteItems();
+    }else{
+        Swal.fire("Before delete you need to select the Item you need to delete!!..");
+    }
+})
+
+function deleteItems(){
+    const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+    },
+    buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "No, cancel!",
+    reverseButtons: true
+    }).then((result) => {
+    if (result.isConfirmed) {
+        //HERE DELETE
+        deleteItemObj();
+        swalWithBootstrapButtons.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+        });
+
+        resetPage();
+        
+    } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+    ) {
+        swalWithBootstrapButtons.fire({
+        title: "Cancelled",
+        text: "Your imaginary file is safe :)",
+        icon: "error"
+        });
+    }
+    });
+}
+
+function deleteItemObj(){
+    let index;
+    for(let i = 0; i < item_db.length; i++){
+        if(lblItemId.innerText == item_db[i].item_Id){
+            index = i;
+        }
+    }
+
+    console.log(item_db[index]);
+    item_db.splice(index,1);
+}
 
 function resetPage(){
     loadTable();
