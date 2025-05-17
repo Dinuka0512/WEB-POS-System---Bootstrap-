@@ -32,6 +32,8 @@ function pageReset(){
     btnDelete.prop("disabled", true);
     btnReset.prop("disabled", true);
     btnUpdate.prop("disabled", true);
+
+    $("#txtQty").prop('disabled',true);
 }
 
 
@@ -88,6 +90,7 @@ comboCustomer.on("click", function(){
     }
 })
 
+let itemIndex;
 comboItem.on('click', function(e){
     if(item_db.length == 0){
         Swal.fire("There Havent Any Items..\n Before Place Orders Save new Item!");
@@ -110,12 +113,31 @@ comboItem.on('click', function(e){
             $("#iQty").html(item_db[index].item_qty);
             $("#iprice").html(item_db[index].item_price);
 
+            itemIndex = index;
+
             //NEED TO SHOW IT NOW
             $('#itemDetails').css('display','block');
+            $("#txtQty").prop('disabled',false);
         }else{
             //IF SELECTED THE CHOOSE OPTION DETAILS ARE DESSAPIER 
             $('#itemDetails').css('display','none');
+            $("#txtQty").prop('disabled',true);
         }
     }
 })
 
+//ADD EVENT LISTNER TO QTY TEXT FEILD
+$("#txtQty").on("keyup",function(){
+    let itemPrice = item_db[itemIndex].item_price;
+    let qtyOnHand = item_db[itemIndex].item_qty;
+    let itemsBuy = $("#txtQty").val();
+
+    if(itemsBuy <= 0 ){
+        Swal.fire("There Can't be buy zero items!");
+    }else if(qtyOnHand < itemsBuy){
+        Swal.fire("Enough Quntity to fullfill your requrement!");
+    }
+
+    let total = itemPrice * itemsBuy;
+    $("#Total").html("Rs " + total + "/");
+})
