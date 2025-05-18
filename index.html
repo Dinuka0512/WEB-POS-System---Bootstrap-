@@ -307,7 +307,7 @@
             <div class="form m-2">
               <form>
                 <div>
-                  <label for="custFName" class="form-label">Order_Id : <span><b>O0879</b></span></label>
+                  <label class="form-label">Order_Id : <span style="font-weight: bold;" id="lblOrderId">O0879</span></label>
                 </div>
                 
                 <!-- CUSTOMER -->
@@ -366,11 +366,11 @@
                 </div>
 
                 <!-- BUTTONS -->
-                <div class="butons">
-                  <button type="submit" class="btn btn-success" id="orderSave">Save</button>
-                  <button type="button" class="btn btn-danger" id="orderDelete">Delete</button>
+                <div class="butons" style="display: flex; justify-content: center;">
+                  <button type="submit" class="btn btn-success" style="width: 100%;" id="addToCart">Add To cart</button>
+                  <!-- <button type="button" class="btn btn-danger" id="orderDelete">Delete</button>
                   <button type="submit" class="btn btn-primary" id="orderUpdate">Update</button>
-                  <button type="reset" class="btn btn-secondary" id="orderReset">Reset</button>
+                  <button type="reset" class="btn btn-secondary" id="orderReset">Reset</button> -->
                 </div>
 
               </form>
@@ -383,16 +383,36 @@
               <table class="table table-striped custTable" id="custtable">
                 <thead>
                   <tr>
-                    <th scope="col">Cust_Id</th>
-                    <th scope="col">Frist Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Item Id</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody id="orderTBody">
                   
                 </tbody>
               </table>
+
+              <div style="width: 100%; height: fit-content; background-color: white; border-radius: 10px;" class="p-4 mb-2">
+                <div><h1 style="color: red;">Total : <span id="FullAmount">Rs 00/=</span></h1></div>
+                <div>
+                  <div class="row g-3">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Cash " aria-label="Cash ">
+                    </div>
+                    <div class="col-sm">
+                      <input type="text" class="form-control" placeholder="Balance " aria-label="Balance ">
+                    </div>
+                    <div class="col-sm">
+                      <input type="text" class="form-control" placeholder="Discount " aria-label="Discount ">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-success p-3" style="width: 100%;" id="Place Order">Place Order</button>
               <!-- END OF TABLE -->
             </div>
 

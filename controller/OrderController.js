@@ -34,6 +34,9 @@ function pageReset(){
     btnUpdate.prop("disabled", true);
 
     $("#txtQty").prop('disabled',true);
+
+    //GENARATE NEW ORDER ID
+    genarateNewOrderId();
 }
 
 
@@ -134,10 +137,33 @@ $("#txtQty").on("keyup",function(){
 
     if(itemsBuy <= 0 ){
         Swal.fire("There Can't be buy zero items!");
-    }else if(qtyOnHand < itemsBuy){
+    }else if(itemsBuy > qtyOnHand){
         Swal.fire("Enough Quntity to fullfill your requrement!");
+    }else{
+        let total = itemPrice * itemsBuy;
+        $("#Total").html("Rs " + total + "/");
+    }
+})
+
+genarateNewOrderId();
+function genarateNewOrderId(){
+    let maxId = 0;
+
+    for (let i = 0; i < order_db.length; i++) {
+        let idNum = parseInt(order_db[i].orderId.replace("O", ""));
+        if (idNum > maxId) {
+            maxId = idNum;
+        }
     }
 
-    let total = itemPrice * itemsBuy;
-    $("#Total").html("Rs " + total + "/");
+    let nextId = "O" + String(maxId + 1).padStart(3, "0");
+    $("#lblOrderId").text(nextId);
+}
+
+function orderSave(){
+
+}
+
+$("#addToCart").on("click", function(){
+    
 })
