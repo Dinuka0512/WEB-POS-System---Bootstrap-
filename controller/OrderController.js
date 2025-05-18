@@ -211,8 +211,16 @@ $("#addToCart").on("click", function(){
         return;
     }
 
+    //FIND THE ITEM INDEX
+    let itemIndex = item_db.findIndex(item => item.item_Id === itemId);
+    if (itemIndex === -1) {
+        Swal.fire("Item Not Found", "Selected item doesn't exist!", "error");
+        return;
+    }
+
     //NEED TO CHECK IS THERE HAVE
     //SAME ORDER ID AND ITEM ID
+    let isUpdated = false;
     for(let i = 0; i < orderDetails_db.length; i++){
         if(lblId == orderDetails_db[i].orderId){
             if(itemId == orderDetails_db[i].itemId){
@@ -221,56 +229,29 @@ $("#addToCart").on("click", function(){
                 let bought = parseFloat(orderDetails_db[i].qty);
                 let total = bought + Buyingqty;
 
-                //UPDATE
-                orderDetails_db[i].qty = total;
-                loadTable();
+                if(total <= parseFloat(item_db[itemIndex].item_qty)){
+                    //UPDATE
+                    orderDetails_db[i].qty = total;
+                    isUpdated = true;
+                    loadTable();
+                }else{
+                    Swal.fire("Invalid Quantity", "Enough qty to fullFill your Requrement!", "warning");
+                }
                 return;
-            }else{
-                return
             }
-        }else{
-            return;
         }
+
+        return;
     }
 
     //NEED TO SAVE
-    let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
-    orderDetails_db.push(orderdetails);
-    console.log(orderDetails_db);
+    if(!isUpdated){
+        let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
+        orderDetails_db.push(orderdetails);
+        console.log(orderDetails_db);
 
-
-    
-
-    // if(Buyingqty != 0 && parseFloat(item_db[itemIndex].item_qty) <= Buyingqty){
-    //     //HERE SAVE TO THE ORDER DETAIL MODEL
-    //     let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
-    //     orderDetails_db.push(orderdetails);
-    //     console.log(orderDetails_db);
-    // }
-
-    // let index;
-    // let check = false;
-    // for(let i = 0; i < orderDetails_db.length; i++){
-    //     if(lblId == orderDetails_db[i].orderId){
-    //         if(itemId == orderDetails_db[i].itemId){
-    //             index = i;
-    //             check = true;
-    //         }
-    //     }
-    // }
-
-    // //THERE  I NEED TO REMOVE THE SAME ORDER ID / AMD ITEM ID 
-    // //IS THERE HAVE I NEEED TO ADDITION THE QTY THERE 
-
-    // //AND ALSO THERE NEED TO reduce from the item qty ...
-    // //WHET WE HAVE BUYING QTY 
-
-    // if(check){
-    //     //IF THERE HAVE ADDED AGAIN NOW WE CAN UPDATE THE ORDERDETAILDB 
-    //     orderDetails_db[index].qty = orderDetails_db[index].qty + Buyingqty;
-    // }
-
-    loadTable();
+        loadTable();
+    }
 })
 
 function loadTable(){
