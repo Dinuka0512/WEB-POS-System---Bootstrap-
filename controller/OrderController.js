@@ -1,6 +1,7 @@
 import{order_db}from '../db/db.js';
 import{customer_db}from '../db/db.js';
 import{item_db}from '../db/db.js';
+import{orderDetails_db}from '../db/db.js';
 import { Validation } from '../Util/Validation.js';
 
 // TABLE 
@@ -15,6 +16,9 @@ let btnReset = $("#orderReset");
 //DROPDOWN MENU
 let comboItem = $("#ItemIdSelector");
 let comboCustomer = $("#CustomerSelector");
+
+//ID
+let lblOrderId = $("#lblOrderId");
 
 
 btnReset.on('click', function(){
@@ -130,20 +134,44 @@ comboItem.on('click', function(e){
 })
 
 //ADD EVENT LISTNER TO QTY TEXT FEILD
-$("#txtQty").on("keyup",function(){
-    let itemPrice = item_db[itemIndex].item_price;
-    let qtyOnHand = item_db[itemIndex].item_qty;
-    let itemsBuy = $("#txtQty").val();
+$("#txtQty").on("keyup", function () {
+    // Get input value and convert to number
+    const itemsBuy = parseFloat($("#txtQty").val()) || 0;
 
-    if(itemsBuy <= 0 ){
-        Swal.fire("There Can't be buy zero items!");
-    }else if(itemsBuy > qtyOnHand){
-        Swal.fire("Enough Quntity to fullfill your requrement!");
-    }else{
-        let total = itemPrice * itemsBuy;
-        $("#Total").html("Rs " + total + "/");
+    // Check if item data is available
+    if (!item_db || !item_db[itemIndex]) {
+        Swal.fire("Error", "Item data not found!", "error");
+        $("#Total").html("INVALID");
+        return;
     }
-})
+
+    const itemPrice = item_db[itemIndex].item_price;
+    const qtyOnHand = item_db[itemIndex].item_qty;
+
+    // Validate input
+    if (isNaN(itemsBuy) || itemsBuy < 0) {
+        Swal.fire("Invalid Input", "Please enter a valid quantity!", "warning");
+        $("#txtQty").val(""); // Clear invalid input
+        $("#Total").html("Rs 0");
+        return;
+    }
+
+    if (itemsBuy === 0) {
+        Swal.fire("Invalid Quantity", "Cannot buy zero items!", "warning");
+        $("#Total").html("Rs 0");
+        return;
+    }
+
+    if (itemsBuy > qtyOnHand) {
+        Swal.fire("Out of Stock", "Not enough quantity to fulfill your request!", "warning");
+        $("#Total").html("Rs 0");
+        return;
+    }
+
+    // Calculate and display total
+    const total = (itemPrice * itemsBuy).toFixed(2); // Round to 2 decimal places
+    $("#Total").html(`Rs ${total}`);
+});
 
 genarateNewOrderId();
 function genarateNewOrderId(){
@@ -160,10 +188,22 @@ function genarateNewOrderId(){
     $("#lblOrderId").text(nextId);
 }
 
-function orderSave(){
-
-}
-
 $("#addToCart").on("click", function(){
-    
+    let lblId = lblOrderId.text();
+    let Buyingqty = $("#txtQty").val();
+    let itemId = comboItem.val();
+
+    let index;
+    let check = false;
+    for(let i = 0; i < item_db.length; i++){
+        if(itemId == item_db[i].itemId){
+            index = i;
+            check = true;
+        }
+    }
+
+    if(check){
+        //NOW SAVE TO ORDER DETAILS TABLE
+        
+    }
 })
