@@ -160,12 +160,14 @@ $("#txtQty").on("keyup", function () {
 
     if (itemsBuy === 0) {
         Swal.fire("Invalid Quantity", "Cannot buy zero items!", "warning");
+        $("#txtQty").val(""); // Clear invalid input
         $("#Total").html("Rs 0");
         return;
     }
 
     if (itemsBuy > qtyOnHand) {
         Swal.fire("Out of Stock", "Not enough quantity to fulfill your request!", "warning");
+        $("#txtQty").val(""); // Clear invalid input
         $("#Total").html("Rs 0");
         return;
     }
@@ -190,39 +192,57 @@ function genarateNewOrderId(){
     $("#lblOrderId").text(nextId);
 }
 
+
+
 $("#addToCart").on("click", function(){
     let lblId = lblOrderId.text();
-    let Buyingqty = $("#txtQty").val();
+    let Buyingqty = parseFloat($("#txtQty").val());
     let itemId = comboItem.val();
 
-    if(Buyingqty != 0){
-        //HERE SAVE TO THE ORDER DETAIL MODEL
-        let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
-        orderDetails_db.push(orderdetails);
-        console.log(orderDetails_db);
+    console.log(Buyingqty);
+    console.log(item_db);
+
+    //HERE CHECK IS BUYING CONTITY IS NULL
+    if (!$("#txtQty").val() || isNaN(Buyingqty)) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Invalid Data',
+            text: 'Null or missing value detected in Qty',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#3085d6'
+        });
+        return;
     }
 
-    let index;
-    let check = false;
-    for(let i = 0; i < orderDetails_db.length; i++){
-        if(lblId == orderDetails_db[i].orderId){
-            if(itemId == orderDetails_db[i].itemId){
-                index = i;
-                check = true;
-            }
-        }
-    }
 
-    //THERE  I NEED TO REMOVE THE SAME ORDER ID / AMD ITEM ID 
-    //IS THERE HAVE I NEEED TO ADDITION THE QTY THERE 
+    // if(Buyingqty != 0 && parseFloat(item_db[itemIndex].item_qty) <= Buyingqty){
+    //     //HERE SAVE TO THE ORDER DETAIL MODEL
+    //     let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
+    //     orderDetails_db.push(orderdetails);
+    //     console.log(orderDetails_db);
+    // }
 
-    //AND ALSO THERE NEED TO reduce from the item qty ...
-    //WHET WE HAVE BUYING QTY 
+    // let index;
+    // let check = false;
+    // for(let i = 0; i < orderDetails_db.length; i++){
+    //     if(lblId == orderDetails_db[i].orderId){
+    //         if(itemId == orderDetails_db[i].itemId){
+    //             index = i;
+    //             check = true;
+    //         }
+    //     }
+    // }
 
-    if(check){
-        //IF THERE HAVE ADDED AGAIN NOW WE CAN UPDATE THE ORDERDETAILDB 
-        orderDetails_db[index].qty = orderDetails_db[index].qty + Buyingqty;
-    }
+    // //THERE  I NEED TO REMOVE THE SAME ORDER ID / AMD ITEM ID 
+    // //IS THERE HAVE I NEEED TO ADDITION THE QTY THERE 
+
+    // //AND ALSO THERE NEED TO reduce from the item qty ...
+    // //WHET WE HAVE BUYING QTY 
+
+    // if(check){
+    //     //IF THERE HAVE ADDED AGAIN NOW WE CAN UPDATE THE ORDERDETAILDB 
+    //     orderDetails_db[index].qty = orderDetails_db[index].qty + Buyingqty;
+    // }
 
     loadTable();
 })
