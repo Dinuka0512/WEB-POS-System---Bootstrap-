@@ -211,10 +211,35 @@ $("#addToCart").on("click", function(){
         return;
     }
 
+    //NEED TO CHECK IS THERE HAVE
+    //SAME ORDER ID AND ITEM ID
+    for(let i = 0; i < orderDetails_db.length; i++){
+        if(lblId == orderDetails_db[i].orderId){
+            if(itemId == orderDetails_db[i].itemId){
+                //THAT MEANS THERE HAVE ACCESS THE SAME PRIMATY KEY
+                //IS THERE ALLREADY HAVE CAN UPDATE NOW
+                let bought = parseFloat(orderDetails_db[i].qty);
+                let total = bought + Buyingqty;
+
+                //UPDATE
+                orderDetails_db[i].qty = total;
+                loadTable();
+                return;
+            }else{
+                return
+            }
+        }else{
+            return;
+        }
+    }
+
     //NEED TO SAVE
     let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
     orderDetails_db.push(orderdetails);
     console.log(orderDetails_db);
+
+
+    
 
     // if(Buyingqty != 0 && parseFloat(item_db[itemIndex].item_qty) <= Buyingqty){
     //     //HERE SAVE TO THE ORDER DETAIL MODEL
