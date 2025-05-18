@@ -199,9 +199,6 @@ $("#addToCart").on("click", function(){
     let Buyingqty = parseFloat($("#txtQty").val());
     let itemId = comboItem.val();
 
-    console.log(Buyingqty);
-    console.log(item_db);
-
     //HERE CHECK IS BUYING CONTITY IS NULL
     if (!$("#txtQty").val() || isNaN(Buyingqty)) {
         Swal.fire({
@@ -214,6 +211,10 @@ $("#addToCart").on("click", function(){
         return;
     }
 
+    //NEED TO SAVE
+    let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
+    orderDetails_db.push(orderdetails);
+    console.log(orderDetails_db);
 
     // if(Buyingqty != 0 && parseFloat(item_db[itemIndex].item_qty) <= Buyingqty){
     //     //HERE SAVE TO THE ORDER DETAIL MODEL
