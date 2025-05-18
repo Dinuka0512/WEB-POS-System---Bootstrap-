@@ -2,6 +2,8 @@ import{order_db}from '../db/db.js';
 import{customer_db}from '../db/db.js';
 import{item_db}from '../db/db.js';
 import{orderDetails_db}from '../db/db.js';
+import OrderDetailsModel from '../model/orderDetailsModel.js';
+import orderDetailsModel from '../model/orderDetailsModel.js';
 import { Validation } from '../Util/Validation.js';
 
 // TABLE 
@@ -193,17 +195,78 @@ $("#addToCart").on("click", function(){
     let Buyingqty = $("#txtQty").val();
     let itemId = comboItem.val();
 
+    if(Buyingqty != 0){
+        //HERE SAVE TO THE ORDER DETAIL MODEL
+        let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
+        orderDetails_db.push(orderdetails);
+        console.log(orderDetails_db);
+    }
+
     let index;
     let check = false;
-    for(let i = 0; i < item_db.length; i++){
-        if(itemId == item_db[i].itemId){
-            index = i;
-            check = true;
+    for(let i = 0; i < orderDetails_db.length; i++){
+        if(lblId == orderDetails_db[i].orderId){
+            if(itemId == orderDetails_db[i].itemId){
+                index = i;
+                check = true;
+            }
         }
     }
 
+    //THERE  I NEED TO REMOVE THE SAME ORDER ID / AMD ITEM ID 
+    //IS THERE HAVE I NEEED TO ADDITION THE QTY THERE 
+
+    //AND ALSO THERE NEED TO reduce from the item qty ...
+    //WHET WE HAVE BUYING QTY 
+
     if(check){
-        //NOW SAVE TO ORDER DETAILS TABLE
-        
+        //IF THERE HAVE ADDED AGAIN NOW WE CAN UPDATE THE ORDERDETAILDB 
+        orderDetails_db[index].qty = orderDetails_db[index].qty + Buyingqty;
     }
+
+    loadTable();
 })
+
+function loadTable(){
+    let table = $("#orderTBody");
+    table.empty();
+
+    for(let i =0; i < orderDetails_db.length; i++){
+        // Assuming this is inside a loop
+        let row = document.createElement('tr');
+
+        // Create table cells
+        const orderIdCell = document.createElement('td');
+        orderIdCell.textContent = orderDetails_db[i].orderId || ''; // Fallback for undefined
+        row.appendChild(orderIdCell);
+
+        const itemIdCell = document.createElement('td');
+        itemIdCell.textContent = orderDetails_db[i].itemId || '';
+        row.appendChild(itemIdCell);
+
+        const qtyCell = document.createElement('td');
+        qtyCell.textContent = orderDetails_db[i].qty || '';
+        row.appendChild(qtyCell);
+
+        // Create Remove button
+        const buttonCell = document.createElement('td');
+        const removeButton = document.createElement('button');
+        removeButton.className = 'btn-danger p-1';
+        removeButton.textContent = 'Remove';
+        removeButton.dataset.orderId = orderDetails_db[i].orderId; // Unique identifier for the row
+        removeButton.addEventListener('click', () => {
+            // Example: Remove row or send request to delete order
+            console.log(`Removing order: ${orderDetails_db[i].orderId}`);
+            row.remove(); // Remove row from DOM
+        });
+        buttonCell.appendChild(removeButton);
+        row.appendChild(buttonCell);
+
+        // Append row to table (assuming table exists with id="orderTable")
+        tbody.append(row);
+    }
+}
+
+$("#remove-btn").on("click", function () {
+    console.log("hi");
+});
