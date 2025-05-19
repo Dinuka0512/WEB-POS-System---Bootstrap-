@@ -54,6 +54,13 @@ function pageReset(){
 
     disableBalance();
     disableDiscount();
+    loadTable();
+
+
+    //CLEAR TEXTS
+    comboCustomer.val("Choose");
+    comboItem.val("Choose");
+    $("#txtQty").val("");
 }
 
 function disableBalance(){
@@ -274,14 +281,17 @@ $("#addToCart").on("click", function(){
 
 
 function loadFullAmount(){
+    FullAmount = 0;
     //THERE NEED TO CALCULATE THE TOTAL
     for(let i = 0; i < orderDetails_db.length; i++){
-        for(let j = 0; j < item_db.length; j++){
-            if(orderDetails_db[i].itemId == item_db[j].item_Id){
-                let tot = orderDetails_db[i].qty * item_db[j].item_price;
-                FullAmount += tot;
+       if($("#lblOrderId").html() == orderDetails_db[i].orderId){
+            for(let j = 0; j < item_db.length; j++){
+                if(orderDetails_db[i].itemId == item_db[j].item_Id){
+                    let tot = orderDetails_db[i].qty * item_db[j].item_price;
+                    FullAmount += tot;
+                }
             }
-        }
+       }
     }
 
     $("#FullAmount").html("Rs " + FullAmount + "/=")
@@ -292,60 +302,63 @@ function loadTable(){
     table.empty();
 
     for(let i =0; i < orderDetails_db.length; i++){
-        // Assuming this is inside a loop
-        let row = document.createElement('tr');
+        if($("#lblOrderId").html() == orderDetails_db[i].orderId){
+            // Assuming this is inside a loop
+            let row = document.createElement('tr');
 
-        // Create table cells
-        const orderIdCell = document.createElement('td');
-        orderIdCell.textContent = orderDetails_db[i].orderId || ''; // Fallback for undefined
-        row.appendChild(orderIdCell);
+            // Create table cells
+            const orderIdCell = document.createElement('td');
+            orderIdCell.textContent = orderDetails_db[i].orderId || ''; // Fallback for undefined
+            row.appendChild(orderIdCell);
 
-        const itemIdCell = document.createElement('td');
-        itemIdCell.textContent = orderDetails_db[i].itemId || '';
-        row.appendChild(itemIdCell);
+            const itemIdCell = document.createElement('td');
+            itemIdCell.textContent = orderDetails_db[i].itemId || '';
+            row.appendChild(itemIdCell);
 
-        const qtyCell = document.createElement('td');
-        qtyCell.textContent = orderDetails_db[i].qty || '';
-        row.appendChild(qtyCell);
+            const qtyCell = document.createElement('td');
+            qtyCell.textContent = orderDetails_db[i].qty || '';
+            row.appendChild(qtyCell);
 
-        // Create Remove button
-        const buttonCell = document.createElement('td');
-        const removeButton = document.createElement('button');
-        removeButton.className = 'btn-danger p-1';
-        removeButton.textContent = 'Remove';
-        removeButton.dataset.orderId = orderDetails_db[i].orderId; // Unique identifier for the row
-        removeButton.addEventListener('click', () => {
+            // Create Remove button
+            const buttonCell = document.createElement('td');
+            const removeButton = document.createElement('button');
+            removeButton.className = 'btn-danger p-1';
+            removeButton.textContent = 'Remove';
+            removeButton.dataset.orderId = orderDetails_db[i].orderId; // Unique identifier for the row
+            removeButton.addEventListener('click', () => {
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to delete this item?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    
-                    //DELETE 
-                    orderDetails_db.splice(i,1);
-                    row.remove(); // Remove row from DOM
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you want to delete this item?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        
+                        //DELETE 
+                        orderDetails_db.splice(i,1);
+                        row.remove(); // Remove row from DOM
+                        loadFullAmount();
 
-                    Swal.fire(
-                        'Deleted!',
-                        'The item has been deleted.',
-                        'success'
-                    );
-                }
+                        Swal.fire(
+                            'Deleted!',
+                            'The item has been deleted.',
+                            'success'
+                        );
+                    }
+                });
+
             });
+            buttonCell.appendChild(removeButton);
+            row.appendChild(buttonCell);
 
-        });
-        buttonCell.appendChild(removeButton);
-        row.appendChild(buttonCell);
-
-        // Append row to table (assuming table exists with id="orderTable")
-        tbody.append(row);
+            // Append row to table (assuming table exists with id="orderTable")
+            tbody.append(row);
+        }
     }
 }
 
@@ -381,6 +394,8 @@ $("#PlaceOrder").on('click', function(){
 
 function placeOrderNow(){
     let orderId = $("#lblOrderId").text();
+    let customerId = comboCustomer.val();
+    let date = new Date();
     let orderDetails = [];
 
 
@@ -388,9 +403,39 @@ function placeOrderNow(){
 
     for(let i = 0; i < orderDetails_db.length; i++){
         if(orderDetails_db[i].orderId == orderId){
-            orderDetails.push(orderDetails[i]);
+            orderDetails.push(orderDetails_db[i]);
         }
     }
 
-    let order = new OrderModel()
+    let order = new OrderModel(orderId, customerId, orderDetails, date);
+    order_db.push(order);
+    console.log(order);
+
+    let balance = $("#txtCash").val() - FullAmount;
+    $("#txtBalance").val(balance);
+    $("#txtDiscount").val("0%");
+
+    pageReset();
+}
+
+
+$("#CancelOrder").on('click', function(){
+    //HERE REMOVE THE ALL ITEMS IN ORDER DETAIL WHICH SAME TO THE CURRENT ORDER ID
+    removeOrderdeialItems();
+    pageReset();
+})
+
+
+function removeOrderdeialItems(){
+    let orderId = $("#lblOrderId").text();
+    for(let i = 0; i < orderDetails_db.length; i++){
+        if(orderDetails_db[i].orderId == orderId){
+            orderDetails_db.splice(i, 1);
+        }
+    }
+
+    $("#txtCash").val("");
+    $("#txtBalance").val("");
+    $("#txtDiscount").val("");
+    $("#Total").html("Rs 0.00/=");
 }
