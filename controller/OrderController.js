@@ -3,8 +3,9 @@ import{customer_db}from '../db/db.js';
 import{item_db}from '../db/db.js';
 import{orderDetails_db}from '../db/db.js';
 import OrderDetailsModel from '../model/orderDetailsModel.js';
-import orderDetailsModel from '../model/orderDetailsModel.js';
+import itemSoldModel from '../model/itemSoldmodel.js';
 import { Validation } from '../Util/Validation.js';
+import OrderModel from '../model/OrderModel.js';
 
 // TABLE 
 let tbody = $("#orderTBody");
@@ -22,6 +23,13 @@ let comboCustomer = $("#CustomerSelector");
 //ID
 let lblOrderId = $("#lblOrderId");
 
+
+//ITEM SOLED AND QTY BUY
+// THERE SAVE THE ITEM INDEX & QTY SOLD 
+let itemSold = [];
+
+//FULL AMOUNT
+let FullAmount = 0;
 
 btnReset.on('click', function(){
     pageReset();
@@ -43,8 +51,18 @@ function pageReset(){
 
     //GENARATE NEW ORDER ID
     genarateNewOrderId();
+
+    disableBalance();
+    disableDiscount();
 }
 
+function disableBalance(){
+    $("#txtBalance").prop( "disabled", true);
+}
+
+function disableDiscount(){
+    $("#txtDiscount").prop( "disabled", true);
+}
 
 function loadCustomerIdsToDropDown(){
     comboCustomer.html("<option selected>Choose</option>");
@@ -232,27 +250,42 @@ $("#addToCart").on("click", function(){
                 if(total <= parseFloat(item_db[itemIndex].item_qty)){
                     //UPDATE
                     orderDetails_db[i].qty = total;
+                    
                     isUpdated = true;
                     loadTable();
+                    loadFullAmount();
                 }else{
                     Swal.fire("Invalid Quantity", "Enough qty to fullFill your Requrement!", "warning");
                 }
                 return;
             }
         }
-
-        return;
     }
 
     //NEED TO SAVE
     if(!isUpdated){
         let orderdetails = new OrderDetailsModel(lblId, itemId, Buyingqty);
         orderDetails_db.push(orderdetails);
-        console.log(orderDetails_db);
 
         loadTable();
+        loadFullAmount();
     }
 })
+
+
+function loadFullAmount(){
+    //THERE NEED TO CALCULATE THE TOTAL
+    for(let i = 0; i < orderDetails_db.length; i++){
+        for(let j = 0; j < item_db.length; j++){
+            if(orderDetails_db[i].itemId == item_db[j].item_Id){
+                let tot = orderDetails_db[i].qty * item_db[j].item_price;
+                FullAmount += tot;
+            }
+        }
+    }
+
+    $("#FullAmount").html("Rs " + FullAmount + "/=")
+}
 
 function loadTable(){
     let table = $("#orderTBody");
@@ -282,9 +315,31 @@ function loadTable(){
         removeButton.textContent = 'Remove';
         removeButton.dataset.orderId = orderDetails_db[i].orderId; // Unique identifier for the row
         removeButton.addEventListener('click', () => {
-            // Example: Remove row or send request to delete order
-            console.log(`Removing order: ${orderDetails_db[i].orderId}`);
-            row.remove(); // Remove row from DOM
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete this item?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    //DELETE 
+                    orderDetails_db.splice(i,1);
+                    row.remove(); // Remove row from DOM
+
+                    Swal.fire(
+                        'Deleted!',
+                        'The item has been deleted.',
+                        'success'
+                    );
+                }
+            });
+
         });
         buttonCell.appendChild(removeButton);
         row.appendChild(buttonCell);
@@ -294,6 +349,48 @@ function loadTable(){
     }
 }
 
-$("#remove-btn").on("click", function () {
-    console.log("hi");
-});
+
+//PLACE ORDER
+$("#PlaceOrder").on('click', function(){
+    //NEED TO CHECK IS COMBO CUSTOMER IS != CHOOSE
+    if(FullAmount != 0){
+        if(comboCustomer.val() != 'Choose'){
+            if(FullAmount <= $("#txtCash").val()){
+                placeOrderNow();
+            }
+        }else{
+            Swal.fire({
+                icon: 'warning',
+                title: 'Customer Not Selected',
+                text: 'Please select a customer before adding to cart.',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#3085d6'
+            });
+        }
+    }else{
+        Swal.fire({
+            icon: 'warning',
+            title: 'No Items Added',
+            text: 'Please add at least one item to the cart before placing the order.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#3085d6'
+        });
+    }
+})
+
+
+function placeOrderNow(){
+    let orderId = $("#lblOrderId").text();
+    let orderDetails = [];
+
+
+    console.log(orderDetails_db);
+
+    for(let i = 0; i < orderDetails_db.length; i++){
+        if(orderDetails_db[i].orderId == orderId){
+            orderDetails.push(orderDetails[i]);
+        }
+    }
+
+    let order = new OrderModel()
+}
