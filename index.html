@@ -80,7 +80,7 @@
                   <div>
                     <div class="card-body text-start">
                       <h5 class="card-title">Yearly Income</h5>
-                      <h1 class="income">Rs <span>233000.00</span>/=</h1>
+                      <h1 class="income">Rs <span id="YearlyIncome">233000.00</span>/=</h1>
                     </div>
                   </div>
                 </div>
@@ -89,7 +89,7 @@
                   <div>
                     <div class="card-body text-start">
                       <h5 class="card-title">Monthly Income</h5>
-                      <h1 class="income">Rs <span>23000.00</span>/=</h1>
+                      <h1 class="income">Rs <span id="MonthlyIncome">23000.00</span>/=</h1>
                     </div>
                   </div>
                 </div>
@@ -98,7 +98,7 @@
                   <div>
                     <div class="card-body text-start">
                       <h5 class="card-title">Today Income</h5>
-                      <h1 class="income">Rs <span>3000.00</span>/=</h1>
+                      <h1 class="income">Rs <span id="TodayIncome">3000.00</span>/=</h1>
                     </div>
                   </div>
                 </div>
@@ -112,43 +112,13 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Customer Id</th>
-                <th scope="col">Order Id</th>
-                <th scope="col">Date</th>
+                <th scope="col">Order_Id</th>
+                <th scope="col">Customer_Id</th>
+                <th scope="col">Item_Id</th>
+                <th scope="col">Qty</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>C0678</td>
-                <td>O07867</td>
-                <td>2025/04/25</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>C0089</td>
-                <td>O07867</td>
-                <td>2025/04/25</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>C67867</td>
-                <td>O07867</td>
-                <td>2025/04/25</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>C67867</td>
-                <td>O07867</td>
-                <td>2025/04/25</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>C67867</td>
-                <td>O07867</td>
-                <td>2025/04/25</td>
-              </tr>
+            <tbody id="ResentSalesTable">
             </tbody>
           </table>
         </div>
@@ -430,6 +400,7 @@
     <script type="module" src="Util/Validation.js"></script>
     <script src="controller/Navigations.js"></script>
     <script type="module" src="controller/itemContro.js"></script>
+    <script type="module" src="controller/DashbordContro.js"></script>
     <script type="module" src="controller/CustomerContro.js"></script>
     <script type="module" src="controller/OrderController.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -399,21 +399,37 @@ function placeOrderNow(){
     let orderDetails = [];
 
 
-    console.log(orderDetails_db);
-
     for(let i = 0; i < orderDetails_db.length; i++){
         if(orderDetails_db[i].orderId == orderId){
+
+            //HERE REDUCE THE ITEM QTY
+            let itemid = orderDetails_db[i].itemId;
+            for(let j = 0; j < item_db.length; j++){
+                if(item_db[j].item_Id == itemid){
+                    item_db[j].item_qty -= orderDetails_db[i].qty;
+                }
+            }
+
             orderDetails.push(orderDetails_db[i]);
         }
     }
 
     let order = new OrderModel(orderId, customerId, orderDetails, date);
     order_db.push(order);
-    console.log(order);
+    // console.log(order);
 
     let balance = $("#txtCash").val() - FullAmount;
     $("#txtBalance").val(balance);
     $("#txtDiscount").val("0%");
+
+    //ORDER PLACED
+    Swal.fire({
+    icon: 'success',
+    title: 'Order Placed!',
+    text: 'Your order has been successfully placed.',
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'OK'
+    });
 
     pageReset();
 }
@@ -439,3 +455,6 @@ function removeOrderdeialItems(){
     $("#txtDiscount").val("");
     $("#Total").html("Rs 0.00/=");
 }
+
+
+console.log("WHAT ARE YOU LOOKING FOR BRO!!! All ARE WORKING WELL 😎😗🫡 \nSEE YOU ")
